@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X, Minus, Plus, Trash2, Send, Loader2, CheckCircle } from "lucide-react"
+import { X, Minus, Plus, Trash2, Send, Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -17,6 +17,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const [showForm, setShowForm] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,6 +29,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError("")
 
     try {
       const response = await fetch("/api/send-inquiry", {
@@ -56,9 +58,15 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           setShowForm(false)
           onClose()
         }, 3000)
+      } else {
+        const data = await response.json().catch(() => null)
+        setSubmitError(
+          data?.error || "Dopyt sa nepodarilo odoslať. Skúste to prosím neskôr."
+        )
       }
     } catch (error) {
       console.error("Error sending inquiry:", error)
+      setSubmitError("Dopyt sa nepodarilo odoslať. Skontrolujte pripojenie a skúste to znova.")
     } finally {
       setIsSubmitting(false)
     }
@@ -110,6 +118,12 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </div>
           ) : showForm ? (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitError && (
+                <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                  <span>{submitError}</span>
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
                   Meno a priezvisko *

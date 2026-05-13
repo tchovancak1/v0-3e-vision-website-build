@@ -1,8 +1,6 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 interface CartItem {
   id: string
   name: string
@@ -22,10 +20,18 @@ interface InquiryRequest {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY environment variable")
+      return NextResponse.json(
+        { error: "Emailová služba nie je nakonfigurovaná" },
+        { status: 500 }
+      )
+    }
+
     const body: InquiryRequest = await request.json()
     const { name, email, phone, company, message, items } = body
 
-    if (!name || !email || items.length === 0) {
+    if (!name || !email || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json(
         { error: "Chýbajú povinné údaje" },
         { status: 400 }
@@ -223,9 +229,14 @@ ${message ? `SPRÁVA:\n${message}` : ""}
 Tento email bol odoslaný z webového portálu 3E-Vision
     `
 
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const fromEmail =
+      process.env.CONTACT_FROM_EMAIL || "3E Vision <noreply@3e-vision.sk>"
+    const toEmail = process.env.CONTACT_TO_EMAIL || "barna@3e-vision.sk"
+
     const { data, error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL || "3E Vision <noreply@3e-vision.sk>",
-      to: [process.env.CONTACT_TO_EMAIL || "barna@3e-vision.sk"],
+      from: fromEmail,
+      to: [toEmail],
       replyTo: email,
       subject: `Nový dopyt od ${name}${company ? ` (${company})` : ""}`,
       html: htmlContent,
@@ -233,7 +244,11 @@ Tento email bol odoslaný z webového portálu 3E-Vision
     })
 
     if (error) {
-      console.error("Resend error:", error)
+      console.error("Resend error:", {
+        error,
+        fromEmail,
+        toEmail,
+      })
       return NextResponse.json(
         { error: "Nepodarilo sa odoslať email" },
         { status: 500 }
