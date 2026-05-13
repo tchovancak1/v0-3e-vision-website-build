@@ -17,6 +17,7 @@ const steps = [
   {
     number: "1",
     icon: Target,
+    iconColor: "text-sky-500",
     title: "Definícia cieľov a technická realizovateľnosť",
     description:
       "Úspech projektu začína presným zadaním. Spoločne zadefinujeme vaše požiadavky a v prípade potreby vypracujeme:",
@@ -29,6 +30,7 @@ const steps = [
   {
     number: "2",
     icon: Box,
+    iconColor: "text-violet-500",
     title: "3D Modelovanie a pokročilé pevnostné analýzy",
     description:
       "Navrhujeme produkty, ktoré sú bezpečné a efektívne. Vytvoríme pre vás:",
@@ -41,6 +43,7 @@ const steps = [
   {
     number: "3",
     icon: FileText,
+    iconColor: "text-emerald-500",
     title: "Precízna výkresová dokumentácia",
     description:
       "Náš konštrukčný tím spracuje kompletné podklady v špičkových softvéroch CREO 5. Výsledkom je bezchybná technická dokumentácia pripravená priamo pre výrobu.",
@@ -49,6 +52,7 @@ const steps = [
   {
     number: "4",
     icon: Cog,
+    iconColor: "text-amber-500",
     title: "Prototypovanie a testovanie",
     description:
       "Prevedieme váš projekt z virtuálneho sveta do reality. Zabezpečíme:",
@@ -60,6 +64,7 @@ const steps = [
   {
     number: "5",
     icon: BookOpen,
+    iconColor: "text-rose-500",
     title: "Komplexná sprievodná dokumentácia",
     description:
       "Garantujeme plynulý priebeh výrobného procesu vďaka príprave všetkých potrebných podkladov:",
@@ -72,6 +77,7 @@ const steps = [
   {
     number: "6",
     icon: Factory,
+    iconColor: "text-cyan-500",
     title: "Odborná asistencia pri nábehu výroby",
     description:
       "Výroba vyžaduje synergiu mnohých činností. Poskytneme vám technickú podporu pri:",
@@ -133,7 +139,7 @@ export function ConstructionSection() {
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
                   {step.number}
                 </div>
-                <step.icon className="h-8 w-8 text-slate-400 mt-2" />
+                <step.icon className={`h-8 w-8 ${step.iconColor} mt-2`} />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-3">
                 {step.title}

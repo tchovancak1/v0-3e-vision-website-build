@@ -5,21 +5,25 @@ import { Shield, Clock, Lightbulb, Users } from "lucide-react"
 const features = [
   {
     icon: Clock,
+    color: "from-sky-400 to-sky-500",
     title: "Šetríme váš čas",
     description: "Rýchle a efektívne riešenia bez zbytočných prieťahov.",
   },
   {
     icon: Shield,
+    color: "from-emerald-400 to-emerald-500",
     title: "Eliminujeme riziká",
     description: "Overené postupy a skúsenosti z praxe.",
   },
   {
     icon: Lightbulb,
+    color: "from-amber-400 to-amber-500",
     title: "Teoretické výpočty",
     description: "Presné analýzy a simulácie pred realizáciou.",
   },
   {
     icon: Users,
+    color: "from-violet-400 to-violet-500",
     title: "Praktické skúsenosti",
     description: "Roky skúseností s reálnymi výrobnými procesmi.",
   },
@@ -47,7 +51,7 @@ export function WhySection() {
               key={index}
               className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-slate-100 group"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                 <feature.icon className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">

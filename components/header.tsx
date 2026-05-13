@@ -20,7 +20,7 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <Image
               src="/images/logo.png"
               alt="3E-Vision"

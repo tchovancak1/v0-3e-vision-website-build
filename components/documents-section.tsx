@@ -10,6 +10,13 @@ const documents = Object.values(products).flatMap((product) =>
   }))
 )
 
+const documentIconColors = [
+  "bg-sky-600",
+  "bg-emerald-600",
+  "bg-violet-600",
+  "bg-amber-600",
+]
+
 export function DocumentsSection() {
   return (
     <section id="dokumenty" className="bg-slate-50 py-20">
@@ -27,14 +34,18 @@ export function DocumentsSection() {
         </div>
 
         <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
-          {documents.map((document) => (
+          {documents.map((document, index) => (
             <a
               key={`${document.productName}-${document.filename}`}
               href={document.url}
               download={document.filename}
               className="group flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
             >
-              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-slate-900">
+              <span
+                className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg ${
+                  documentIconColors[index % documentIconColors.length]
+                }`}
+              >
                 <FileText className="h-6 w-6 text-white" />
               </span>
               <span className="min-w-0 flex-1">

@@ -26,9 +26,9 @@ export function Footer() {
                 href="https://www.3e-vision.sk"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-amber-500 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-sky-500/20 hover:bg-sky-500 flex items-center justify-center transition-colors"
               >
-                <Globe className="h-5 w-5" />
+                <Globe className="h-5 w-5 text-sky-300 hover:text-white" />
               </a>
             </div>
           </div>
@@ -42,7 +42,7 @@ export function Footer() {
                   href="mailto:barna@3e-vision.sk"
                   className="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors"
                 >
-                  <Mail className="h-5 w-5 text-amber-500" />
+                  <Mail className="h-5 w-5 text-sky-400" />
                   barna@3e-vision.sk
                 </a>
               </li>
@@ -51,7 +51,7 @@ export function Footer() {
                   href="tel:+421911359771"
                   className="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors"
                 >
-                  <Phone className="h-5 w-5 text-amber-500" />
+                  <Phone className="h-5 w-5 text-emerald-400" />
                   +421 911 359 771
                 </a>
               </li>
@@ -62,7 +62,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors"
                 >
-                  <Globe className="h-5 w-5 text-amber-500" />
+                  <Globe className="h-5 w-5 text-violet-400" />
                   www.3e-vision.sk
                 </a>
               </li>
@@ -76,7 +76,7 @@ export function Footer() {
               <p className="font-medium text-white">3E-Vision s.r.o.</p>
               <p>Ing. Jozef Barna, PhD.</p>
               <p className="flex items-start gap-2 mt-4">
-                <MapPin className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <MapPin className="h-5 w-5 text-rose-400 flex-shrink-0 mt-0.5" />
                 <span>Smreková 3, 08 001 Prešov, Slovakia</span>
               </p>
             </div>

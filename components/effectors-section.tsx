@@ -15,18 +15,21 @@ import { useCart } from "@/context/cart-context"
 const benefits = [
   {
     icon: Settings,
+    color: "from-sky-400 to-sky-500",
     title: "Návrh na mieru",
     description:
       "Každý efektor vyvíjame podľa konkrétnej aplikácie, typu výrobku a prostredia.",
   },
   {
     icon: TestTube,
+    color: "from-emerald-400 to-emerald-500",
     title: "Testovanie na vašom produkte",
     description:
       "Riešenie testujeme priamo na zákazníkovom produkte a ladíme jeho funkčnosť.",
   },
   {
     icon: Package,
+    color: "from-violet-400 to-violet-500",
     title: "Kompletné dodanie",
     description:
       "Od návrhu cez výrobu až po nasadenie - všetko pod jednou strechou.",
@@ -120,7 +123,7 @@ export function EffectorsSection() {
                   className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-amber-500/50 transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center flex-shrink-0">
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${benefit.color} flex items-center justify-center flex-shrink-0`}>
                       <benefit.icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -138,7 +141,7 @@ export function EffectorsSection() {
 
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
               <h3 className="font-bold text-white mb-4 flex items-center gap-2">
-                <Wrench className="h-5 w-5 text-amber-400" />
+                <Wrench className="h-5 w-5 text-cyan-400" />
                 Vyvíjame efektory pre:
               </h3>
               <div className="flex flex-wrap gap-2">
