@@ -1,0 +1,251 @@
+import { Resend } from "resend"
+import { NextResponse } from "next/server"
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+interface CartItem {
+  id: string
+  name: string
+  type: "service" | "product"
+  quantity?: number
+  description?: string
+}
+
+interface InquiryRequest {
+  name: string
+  email: string
+  phone?: string
+  company?: string
+  message?: string
+  items: CartItem[]
+}
+
+export async function POST(request: Request) {
+  try {
+    const body: InquiryRequest = await request.json()
+    const { name, email, phone, company, message, items } = body
+
+    if (!name || !email || items.length === 0) {
+      return NextResponse.json(
+        { error: "Chýbajú povinné údaje" },
+        { status: 400 }
+      )
+    }
+
+    const itemsList = items
+      .map((item) => {
+        if (item.type === "product" && item.quantity) {
+          return `• ${item.name} - ${item.quantity} ks`
+        }
+        return `• ${item.name}`
+      })
+      .join("\n")
+
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 30px;
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      background: #f8fafc;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      border-top: none;
+    }
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #0f172a;
+      font-size: 16px;
+      border-bottom: 2px solid #f59e0b;
+      padding-bottom: 8px;
+    }
+    .field {
+      margin-bottom: 12px;
+    }
+    .field-label {
+      font-weight: 600;
+      color: #64748b;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .field-value {
+      color: #1e293b;
+      font-size: 15px;
+      margin-top: 4px;
+    }
+    .items-list {
+      background: #fef3c7;
+      padding: 15px 20px;
+      border-radius: 8px;
+      border-left: 4px solid #f59e0b;
+    }
+    .items-list ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .items-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #fde68a;
+    }
+    .items-list li:last-child {
+      border-bottom: none;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Nový nezáväzný dopyt</h1>
+    <p style="margin: 10px 0 0;">3E-Vision s.r.o.</p>
+  </div>
+  
+  <div class="content">
+    <div class="section">
+      <h2>Kontaktné údaje</h2>
+      <div class="field">
+        <div class="field-label">Meno a priezvisko</div>
+        <div class="field-value">${name}</div>
+      </div>
+      <div class="field">
+        <div class="field-label">E-mail</div>
+        <div class="field-value"><a href="mailto:${email}">${email}</a></div>
+      </div>
+      ${
+        phone
+          ? `
+      <div class="field">
+        <div class="field-label">Telefón</div>
+        <div class="field-value"><a href="tel:${phone}">${phone}</a></div>
+      </div>
+      `
+          : ""
+      }
+      ${
+        company
+          ? `
+      <div class="field">
+        <div class="field-label">Spoločnosť</div>
+        <div class="field-value">${company}</div>
+      </div>
+      `
+          : ""
+      }
+    </div>
+
+    <div class="section">
+      <h2>Položky v dopyte</h2>
+      <div class="items-list">
+        <ul>
+          ${items
+            .map(
+              (item) => `
+            <li>
+              <strong>${item.name}</strong>
+              ${item.type === "product" && item.quantity ? ` - ${item.quantity} ks` : ""}
+              ${item.description ? `<br><span style="color: #64748b; font-size: 13px;">${item.description}</span>` : ""}
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </div>
+    </div>
+
+    ${
+      message
+        ? `
+    <div class="section">
+      <h2>Správa od zákazníka</h2>
+      <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+    </div>
+    `
+        : ""
+    }
+  </div>
+
+  <div class="footer">
+    <p>Tento email bol odoslaný z webového portálu 3E-Vision</p>
+  </div>
+</body>
+</html>
+    `
+
+    const textContent = `
+NOVÝ NEZÁVÄZNÝ DOPYT - 3E-Vision s.r.o.
+========================================
+
+KONTAKTNÉ ÚDAJE:
+- Meno: ${name}
+- E-mail: ${email}
+${phone ? `- Telefón: ${phone}` : ""}
+${company ? `- Spoločnosť: ${company}` : ""}
+
+POLOŽKY V DOPYTE:
+${itemsList}
+
+${message ? `SPRÁVA:\n${message}` : ""}
+
+---
+Tento email bol odoslaný z webového portálu 3E-Vision
+    `
+
+    const { data, error } = await resend.emails.send({
+      from: process.env.CONTACT_FROM_EMAIL || "3E Vision <noreply@3e-vision.sk>",
+      to: [process.env.CONTACT_TO_EMAIL || "barna@3e-vision.sk"],
+      replyTo: email,
+      subject: `Nový dopyt od ${name}${company ? ` (${company})` : ""}`,
+      html: htmlContent,
+      text: textContent,
+    })
+
+    if (error) {
+      console.error("Resend error:", error)
+      return NextResponse.json(
+        { error: "Nepodarilo sa odoslať email" },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: true, id: data?.id })
+  } catch (error) {
+    console.error("Server error:", error)
+    return NextResponse.json(
+      { error: "Interná chyba servera" },
+      { status: 500 }
+    )
+  }
+}

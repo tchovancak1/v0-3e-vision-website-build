@@ -1,0 +1,276 @@
+
+
+Skúšačka napätia TN-210 (RCD)
+Skúšačka TN-210 (RCD) je určená ku dvojpólovému meraniu veľkosti jednosmerného 
+a striedavého napätia od 12 V do 690 V s frekvenciou 0–60Hz , na určenie fázového 
+vodiča, poradia fáz trojfázovej sústavy s nulovým vodičom, určenie polarity 
+jednosmerného napätia, testovanie kontinuity. Skúšačka vyhovuje norme EN 61243-
+3:2015. S touto skúšačkou môžete vykonávať meranie v elektrických inštaláciách 
+a zariadeniach, ktoré zodpovedajú prepäťovej kategórii CATIII 690V. Kategória CATIII 
+je určená na meranie obvodov z vybavenia napájaného pevnou inštaláciou, ako relé, 
+zásuvky, rozvodné panely, napájacie a krátke vetviace obvody a osvetľovacie systémy 
+vo veľkých budovách. Nepoužívajte pre vyššie kategórie CAT. U pohyblivého meracieho 
+hrotu je vždy nutné stlačiť posuvník smerom dole, aby došlo k vysunutiu kovovej 
+špičky hrotu.
+Technické parametre
+Kategória a rozsah merania: CATIII 12–690VAC/DC
+Pracovná teplota: -10 °C až 55 °C
+Napájanie: 1 × 9V batéria, typ 6F22 (6LR61)
+Is- Prúd prechádzajúci meracími hrotmi je cca 1.85mA pri 230V a 3.28mA pri 400V. 
+In-Prúd prechádzajúci ľubovoľným meracím hrotom priloženým na fázový vodič (230V) 
+a kovovým výstupkom priloženým na PE je menši ako 0,16mA.
+Stupeň krytia: IP40
+Rozmery: 28 × 51×190mm
+Hmotnosť: 136 g (priložená batéria)
+Na pohyblivom meracom hrote je vždy potrebné stlačiť posuvník smerom dole, 
+aby došlo k vysunutiu kovovej špičky hrotu. 
+Overenie funkčnosti skúšačky
+Pred použitím skontrolujte funkčnosť skúšačky.
+Pre overenie funkčnosti používajte zdroje, ktorých parametre dobre poznáte.
+• Skratujte meracie hroty a stlačte tlačidlo R, ozve sa bzučiak a rozsvieti sa LED R.
+• Vložte hrot L2 alebo L1 do fázovej dierky zásuvky 230V AC a dotknite sa kovového 
+výstupku na zadnej strane skúšačky. Rozsvieti sa zelená LED L1,3 a ozve sa bzučiak.
+• Pripojte hroty L1 a L2 do oboch dierok zásuvky (230VAC), rozsvieti sa +/-, R a stĺpec 
+LED diód až po 230V a ozve sa bzučiak.
+Poznámka:
+Ak nie je vložená batéria, nebude bzučiak funkčný, pri žiadnom meraní! 
+Pri meraní AC napätia skúšačka vydáva zvuk modulovaný 50Hz.
+Indikácia hodnoty AC napätia
+Priložte oba meracie hroty k meranému objektu (obvodu). Hodnota napätia sa zobrazí 
+na LED stupnici a bude svietiť +/- a R. Zaznie bzučiak.
+Indikácia veľkosti DC napätia
+Priložte oba meracie hroty ku meranému objektu (obvodu). Hodnota napätia sa zobrazí 
+na LED stupnici. Zaznie bzučiak (nad 50V) a LED bude svietiť. Pokiaľ bude na hrote 
+• LED Indikácia prítomnosti fázového napätia 
+a hodnoty napätia aj bez batérie
+• Skúška prúdových chráničov (RCD) aj bez prítomnosti batérie
+• Malý prúd Is prechádzajúci meracími hrotmi 
+(1.85mA pri 230V a 3.28mA pri 400V)
+• Odnímateľný držiak pohyblivého hrotu
+• Dvojtónová signalizácia počas merania
+L2 kladný pól, bude svietiť +LED. Pokiaľ bude na hrote L2 záporný pól, bude svietiť  
+zelená LED.
+Určovanie fázového vodiča
+Priložte pohyblivý merací hrot alebo L2 hrot na fázový  vodič. Priložte prst na kovový 
+výstupok na zadnej strane skúšačky. Pri výskyte fázového napätia vyššieho ako 
+50V zaznie bzučiak a LED L1,3 bude svietiť. Pred meraním vykonajte test na inom 
+overenom fázovom vodiči. Po meraní otestujte obvod znovu pomocou oboch hrotov. 
+Výsledok merania môže byť negatívne ovplyvnený elektrostatickým poľom, úrovňou 
+izolácie a pod.
+Kontrola vybavenia prúdového chrániča
+Oba hroty skúšačky priložte na meraný objekt (zásuvku). Jeden merací hrot priložíme 
+na fázový  vodič a druhý na PE. Stlačíme tlačidlo RCD, cez skúšačku pretečie prúd 30mA 
+po dobu 200ms. Keď chránič je funkčný musí vypnúť . Opakovaná skúška je možná až 
+po uplynutí cca 20s.
+Zisťovanie poradia fáz
+Přiložte prst na kovový výstupok na zadnej strane skúšačky. Pevný merací hrot L2 
+priložte na strednú svorku trojfázovej sústavy. Pohyblivý merací hrot  priložte na svorku 
+vľavo. Keď sú tieto dve fázy v správnom poradí, budú svietiť diódy 12až 230V a zelená 
+dióda L1,3 zhasne. Pokiaľ nie sú tieto dve fázy v správnom poradí, zostane zelená LED 
+dióda L1,3 svietiť. Poznámka: Funkcia zisťovania poradia fáz je funkčná pri napätí 
+vyššom ako 110VAC.Pred meraním otestujte na inom overenom trojfázovom zdroji. 
+Pri meraní dávajte pozor na to, aby hroty mali vždy dobrý kontakt s meraným zdrojom.
+Meranie spojitosti obvodu 
+Oba hroty skúšačky priložte na meraný objekt . Stlačte tlačidlo R. Ak je odpor meraného 
+obvodu <200kΩ, skúšačka to vyhodnotí ako spojitosť, ozve sa bzučiak a rozsvieti sa žltá 
+LED dióda R. Ak je odpor meraného obvodu >200kΩ, ale menší ako 400KΩ, rozsvieti sa 
+LED dióda R, ale bzučiak nezaznie.
+Výmena batérie
+Vymeňte batériu v skúšačke, pokiaľ nezaznie bzučiak alebo sa nerozsvieti LED R, 
+keď skratujete vzájomne oba hroty a stlačíte tlačidlo R. Odpojte skúšačku od zdroja 
+napätia. Odskrutkujte skrutky krytu vhodným skrutkovačom a vložte novú batériu 9V 
+typ 6F22, alebo 6LR61.Nepoužívajte nabíjaciu batériu. Nasaďte a zaskrutkujte späť kryt.
+VAROVANIE
+• Nepoužívajte prístroj s poškodeným káblom alebo krytom.
+• Tento prístroj môže byť obsluhovaný len zodpovednou a preškolenou osobou.
+• Nezisťujte skúšačkou napätie kontaktne, pokiaľ nepoznáte jeho veľkosť!
+• Pri meraní musíte sondu držať za zábranou na tele skúšačky. Zabránite tak 
+náhodnému dotyku s kovovou časťou sondy, ktorá pri meraní môže spôsobiť úraz 
+elektrickým prúdom.
+• Napätie uvedené na skúšačke je menovité napätie . Skúšačku možno užívať len 
+v inštaláciách s uvedeným menovitým napätím.
+• Skúšačka musí byť kontrolovaná pred i po skúške. Ak zlyháva indikácia, nesmie byť 
+používaná.
+• V prípade použitia na vyššie napätie, ako je predpísané, môže dôjsť k poškodeniu.
+• Meracie hroty ani iné časti skúšačky neupravujte a pri poruche alebo inom poškodení 
+dajte do opravy do odborného servisu.
+• Nepoužívajte skúšačku, ak sú jej časti vlhké.
+Čistenie
+• Priebežne utrite skúšačku mäkkou navlhčenou handričkou a bežným domácim 
+čističom. Nepoužívajte agresívne rozpúšťadlá.
+• Zamedzte prieniku vody do vnútorných častí prístroja, zabránite tak skratom a ďalším 
+SK
+11
+1
+2
+3
+4
+5
+10
+8
+12
+7
+6
+9
+NEW
+Popis skúšačky
+DODATOČNÉ VÝHODY
+1. Pohyblivý merací hrot L1
+2. Posuvník
+3. Merací hrot skúšačky L2
+4. LED dióda (zelená) , L1,3
+5. Zábrana skúšačky
+6. LED dióda (žltá) R
+7. Tlačidlo R
+8. LED diódy veľkosti napätia 
+a polarity +/-
+9. Tlačidlo RCD
+10. Kovový výstupok
+11. Batériový priestor
+12. Držiak pohyblivého hrotu skúšačky.
+TN-210(RCD)
+SK
+Skúšačka napätia TN-210(RCD)
+Zkoušečka napětí TN-210(RCD)
+CZ
+
+3E-VISION s.r.o
+Smreková 3, 08 001 Prešov, Slovakia
+email: skusacky@gmail.com
+www.3E-VISION.sk
+Zkoušečka napětí TN-210 (RCD)
+Zkoušečka TN-210 (RCD) je určená ke dvojpólovému měření velikosti stejnosměrného 
+a střídavého napětí od12 V do 690 V s frekvencí 0–60Hz, k určení fázového vodiče, 
+pořadí fází trojfázové soustavy s nulovým vodičem ,určení polarity stejnosměrného 
+napětí, testování kontinuity. Zkoušečka vyhovuje normě EN 61243-3:2015. S touto 
+zkoušečkou můžete provádět měření v elektrických instalacích a zařízeních, které 
+odpovídají přepěťové kategorii CATIII 690V. Kategorie CATIII je určena k měření obvodů 
+z vybavení napájeného pevnou instalací; jako relé, zásuvky, rozvodné panely, napáječe 
+a krátké větvící obvody a osvětlovací systémy ve velkých budovách. Nepoužívejte pro 
+vyšší kategorie CAT. U pohyblivého měřícího hrotu je vždy nutné zmáčknout posuvník 
+směrem dolů, aby došlo k vysunutí kovové špičky hrotu. 
+Technické parametry
+Kategorie a rozsah měření: CATIII 12–690VAC/DC
+Pracovní teplota: -10 °C až 55 °C
+Napájení: 1 × 9V baterie, typ 6F22 (6LR61)
+Is – Proud přecházející měřícími hroty je cca 1.85mA při 230V a 3.28mA při 400V.
+In – Proud procházející libovolným měřicím hrotem přiloženým na fázový vodič (230V) 
+a kovovým výstupkem přiloženým na PE je menší než 0,16mA.
+Stupeň krytí: IP40
+Rozměry: 28 × 51×190mm
+Hmotnost: 136 g (přiložena baterie)
+U pohyblivého měřícího hrotu je vždy nutné zmáčknout posuvník směrem dolů, 
+aby došlo k vysunutí kovové špičky hrotu 
+Ověření funkčnosti zkoušečky
+Před použitím zkontrolujte funkčnost zkoušečky.
+Pro ověření funkčnosti používejte zdroje, jejichž parametry dobře znáte.
+• Zkratujte měřící hroty a stlačte tlačítko R, ozve se bzučák a rozsvítí se LED R.
+• Vložte hrot L2 anebo L1 do fázové zdířky zásuvky 230VAC a dotkněte se kovového 
+výstupku na zadní straně zkoušečky. Rozsvítí se zelena LED L1,3 a ozve se bzučák.
+• Připojte zkoušečku do obou zdířek zásuvky (230 VAC), rozsvítí se +/-, R a sloupec LED 
+diod až po 230V a ozve se bzučák.
+Poznámka: 
+Pokud není vložena baterie, nebude bzučák funkční při žádném měřeni! 
+Při měření AC napětí zkoušečka vydává zvuk modulovaný 50Hz.
+Indikace velikosti AC napětí
+Přiložte oba měřící hroty k měřenému objektu (obvodu). Hodnota napětí se zobrazí 
+na LED stupnici, bude svítit +/- a R. Zazní bzučák.
+Indikace velikosti DC napětí
+Přiložte oba měřící hroty k měřenému objektu (obvodu). Hodnota napětí se zobrazí 
+na LED stupnici. Zazní bzučák (nadcca50V) a LED budou svítit. Pokud bude na hrotu 
+L2 kladný pól, bude svítit+ LED. Pokud bude na hrotu L2 záporný pól, bude svítit 
+(zelena)-LED.
+Určovaní fázového vodiče
+Přiložte pohyblivý měřicí hrot nebo L2 hrot na fázový vodič. Přiložte prst na kovový 
+výstupek na zadní straně zkoušečky. Při výskytu fázového napětí vyšším než 50Vzazní 
+bzučák a LED L1,3bude svítit. Před měřením proveďte test na jiném ověřeném fázovém 
+vodiči. Po měřen otestujte obvod znovu pomocí obou hrotů. Výsledek měření může být 
+negativně ovlivněn elektrostatickým polem, úrovní izolace apod.
+Kontrola vybaveni proudového chrániče
+Přiložte oba měřící hroty k měřenému objektu (obvodu). Jeden měřicí hrot přiložíme 
+na fázový vodič a druhy na PE. Stlačte točidlo RCD, skrz zkoušečku proteče proud 30mA 
+po dobu 200ms. Když chránič je funkční musí vypnout. Opakovaná zkouška je možná 
+až po uplynutí cca 20s .
+Zjišťování pořadí fází
+Přiložte prst na kovový výstupek na zadní straně zkoušečky. Pevný měřicí hrot L2 
+přiložte na střední svorku trojfázové soustavy. Pohyblivý měřicí hrot přiložte na svorku 
+vlevo. Jestli jsou tyto dvě fáze ve správném pořadí, budou svítit diody12až230 V 
+a (zelena)dioda L1,3zhasne. Pokud nejsou tyto dvě fáze ve správném pořadí, zůstane 
+dioda L1,3 svítit. Poznámka: Funkce zjištěni pořadí fází je funkční při napětí vyšším 
+než 110 VAC . Před měřením otestujte na jiném ověřeném třífázovém zdroji. Při měření 
+dbejte na to, aby hroty měly vždy dobrý kontakt s měřeným zdrojem
+Měření spojitosti obvodu
+Oba hroty zkoušečky přiložte na měřený objekt. Stiskněte tlačítko R. Pokud je odpor 
+měřeného obvodu <200kΩ, zkoušečka to vyhodnotí jako spojitost, ozve se bzučák 
+a rozsvítí se žlutá LED dioda R. Pokud je odpor měřeného obvodu >200kΩ, ale menší 
+než 400KΩ, rozsvítí se LED dioda R, ale bzučák nezazní.
+Výměna baterie
+Vyměňte baterii ve zkoušečce pokud: nezazní bzučák nebo se nerozsvítí LED, R když 
+zkratujete vzájemně oba hroty a zmačkněte tlačítko R. Odpojte zkoušečku od zdroje 
+napětí. Odšroubujte šroubky krytu vhodným šroubovákem a sundejte kryt. Vyjměte 
+vybitou baterii. Vložte novou alkalickou baterii 9V  typ 6F22, anebo 6LR61. Dbejte 
+na správnou polaritu kontaktů ;nepoužívejte nabíjecí baterii. Nasaďte a zašroubujte 
+zpět kryt.
+VAROVÁNÍ
+• Nepoužívejte přístroj s poškozeným kabelem nebo krytem.
+• Tento přístroj může být obsluhován pouze odpovědnou a proškolenou osobou.
+• Nezjišťujte zkoušečkou napětí kontaktně, pokud neznáte jeho přesnou velikost!
+• Při měření musíte sondu držet za zábranou na těle zkoušečky. Zabráníte tak 
+náhodnému dotyku s kovovou částí sondy, která přiměření může způsobit úraz 
+elektrickým proudem.
+• Napětí uvedené na zkoušečce je jmenovité napětí. Zkoušečku lze užívat jen 
+v instalacích s uvedeným jmenovitým napětím.
+• Zkoušečka musí být kontrolovaná před i po zkoušce. Pokud selhává indikace, nesmí 
+být používána.
+• V případě použití na vyšší napětí, než je předepsané, může dojít k poškození 
+elektromagnetické cívky a tím ke znehodnocení zkoušečky.
+• Měřící hroty ani jiné části zkoušečky neupravujte 
+• Nepoužívejte zkoušečku, pokud jsou její části vlhké.
+Čistění
+• Průběžně otřete zkoušečku měkkým navlhčeným hadříkem a běžným domácím 
+čističem. Nepoužívejte agresivní rozpouštědla.
+• Zamezte průniku vody do vnitřních částí přístroje, zabráníte tak zkratům a dalším 
+poškozením.
+Tento přístroj není určen pro používání osobami (včetně dětí), jimž fyzická, smyslová 
+nebo mentální  neschopnost  či nedostatek zkušeností a znalostí zabraňuje 
+v bezpečném používaní přístroje, pokud na ně nebude dohlíženo nebo pokud 
+nebyly instruovány ohledně použití tohoto přístroje osobou  zodpovědnou za jejich 
+bezpečnost. Je nutný dohled nad dětmi, aby se zajistilo, že si nebudou s přístrojem hrát.
+Nevyhazujte elektrické spotřebiče jako netříděný komunální odpad, použijte 
+sběrná místa tříděného odpadu.
+3E-VISIONs.r.o. prohlašuje, TN-210(RCD) je ve shodě se základními požadavky a dalšími 
+příslušnými ustanoveními směrnice. Zařízení lze volně provozovat v EU. Prohlášení 
+o shodě lze najít na webove stránce www.3E-VISION.sk.
+poškodeniam.
+Tento prístroj nie je určený pre používanie deťmi a osobami, ktorým fyzická, zmyslová 
+alebo mentálna neschopnosť či nedostatok skúseností a znalostí zabraňuje v 
+bezpečnom používaní prístroja, pokiaľ na ne nebude dohliadané alebo pokiaľ neboli 
+inštruované ohľadne použitia tohto prístroja osobou zodpovednou za ich bezpečnosť. 
+Je nutný dohľad nad deťmi ,aby sa zaistilo, že sa nebudú s prístrojom hrať.
+Nevyhadzujte elektrické spotrebiče, ako netriedený komunálny odpad, použite 
+zberné miesta triedeného odpadu.
+3E-VISION s.r.o. prehlasuje, skúšačka TN-210(RCD) je v zhode so základnými 
+požiadavkami a dalšími príslušnými ustanoveniami smernice. Zariadenie je možné 
+voľne prevádzkovať na území EU. Prehlásenie o zhode je možné najsť na webovej 
+stránke www.3E-VISION.sk.
+CZ
+1. Pohyblivý měřící hrot L1
+2. Posuvník
+3. Měřící hrot zkoušečky L2
+4. LED dioda(zelena) ,L1,3
+5. Zábrana zkoušečky
+6. LED dioda (žluta)R
+7. Tlačítko R
+8. LED diody velikosti napětí 
+a polarity +/-
+9. Tlačítko RCD
+10. Kovový výstupek
+11. Bateriový prostor
+12. Držák pohyblivého hrotu zkoušečky
+Popis zkoušečky
+DODATEČNÉ VÝHODY
+• LED Indikace přítomnosti fázového napětí a hodnoty napětí i bez baterie
+• Zkouška proudových chráničů (RCD) i bez přítomnosti baterie
+• Malý proud Is procházející měřícími hroty (1.85mA při 230V a 3.28mA při 400V)
+• Odnímatelný držák pohyblivého hrotu
+• Dvoutonová signalizace během měření
