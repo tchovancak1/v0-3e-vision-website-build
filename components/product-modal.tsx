@@ -14,99 +14,14 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/context/cart-context"
+import { products, type ProductId } from "@/lib/products"
 
-type ProductId = "tn110" | "tn210"
 type TabType = "info" | "docs"
 
 interface ProductModalProps {
   isOpen: boolean
   onClose: () => void
   productId: ProductId | null
-}
-
-const products = {
-  tn110: {
-    id: "tn110",
-    name: "TN-110 Skúšačka napätia",
-    shortDesc:
-      "Skúšačka TN-110 je určená k dvojpólovému meraniu veľkosti jednosmerného a striedavého napätia od 110 do 400V.",
-    description: `Skúšačka TN-110 je určená k dvojpólovému meraniu veľkosti jednosmerného a striedavého napätia od 110 do 400V s frekvenciou 0-60 Hz, na určenie fázového vodiča, poradia fáz trojfázovej sústavy s nulovým vodičom a určenie polarity jednosmerného napätia.
-
-Skúšačka vyhovuje norme EN61243-3:2014, v rozsahu 110–400V/ CAT III 400V, so stupňom ochrany IP40.
-
-S touto skúšačkou môžete vykonávať meranie v elektrických inštaláciách a zariadeniach, ktoré zodpovedajú prepäťovej kategórii CATIII 400V.`,
-    features: [
-      "LED indikácia fázového napätia",
-      "Podsvietený indikátor napätia",
-      "Snímateľný držiak pohyblivého hrotu",
-      "Rozsah: 110-400V AC/DC",
-      "Kategória: CAT III 400V",
-      "Stupeň ochrany: IP40",
-      "Pracovná teplota: -10°C až +50°C",
-    ],
-    images: [
-      "/images/tn-110/110_Front_hi_DSC07865.jpg",
-      "/images/tn-110/110_Back_hi_DSC07871.jpg",
-      "/images/tn-110/110_hi_DSC07873.jpg",
-      "/images/tn-110/110_hi_DSC07879.jpg",
-      "/images/tn-110/110_hi_DSC07880.jpg",
-      "/images/tn-110/110_hi_DSC07884.jpg",
-      "/images/tn-110/110_hi_DSC07899.jpg",
-      "/images/tn-110/110_hi_DSC07903.jpg",
-    ],
-    documents: [
-      {
-        name: "TN-110 Technická dokumentácia",
-        filename: "TN-110.pdf",
-        url: "/docs/TN-110.pdf",
-      },
-      {
-        name: "TN-110 CE certifikát",
-        filename: "2026-CE-TN110.pdf",
-        url: "/docs/2026-CE-TN110.pdf",
-      },
-    ],
-    color: "amber",
-  },
-  tn210: {
-    id: "tn210",
-    name: "TN-210 (RCD) Skúšačka napätia",
-    shortDesc:
-      "Skúšačka TN-210 (RCD) je určená ku dvojpólovému meraniu veľkosti jednosmerného a striedavého napätia od 12V do 690V.",
-    description: `Skúšačka TN-210 (RCD) je určená ku dvojpólovému meraniu veľkosti jednosmerného a striedavého napätia od 12 V do 690 V s frekvenciou 0–60Hz, na určenie fázového vodiča, poradia fáz trojfázovej sústavy s nulovým vodičom, určenie polarity jednosmerného napätia, testovanie kontinuity.
-
-Skúšačka vyhovuje norme EN 61243-3:2015. S touto skúšačkou môžete vykonávať meranie v elektrických inštaláciách a zariadeniach, ktoré zodpovedajú prepäťovej kategórii CATIII 690V.
-
-Kategória CATIII je určená na meranie obvodov z vybavenia napájaného pevnou inštaláciou, ako relé, zásuvky, rozvodné panely, napájacie a krátke vetviace obvody a osvetľovacie systémy vo veľkých budovách.`,
-    features: [
-      "LED indikácia fázového napätia aj bez batérie",
-      "Skúška prúdových chráničov (RCD) aj bez batérie",
-      "Malý prúd Is (1.85mA pri 230V, 3.28mA pri 400V)",
-      "Odnímateľný držiak pohyblivého hrotu",
-      "Dvojtónová signalizácia počas merania",
-      "Rozsah: 12-690V AC/DC",
-      "Kategória: CAT III 690V",
-      "Stupeň ochrany: IP40",
-    ],
-    images: [
-      "/images/tn-210/210_Front_hi_DSC07861.jpg",
-      "/images/tn-210/210_Back_hi_DSC07864.jpg",
-      "/images/tn-210/210_hi_DSC07874.jpg",
-      "/images/tn-210/210_hi_DSC07887.jpg",
-      "/images/tn-210/210_hi_DSC07889.jpg",
-      "/images/tn-210/210_hi_DSC07890.jpg",
-      "/images/tn-210/210_hi_DSC07897.jpg",
-      "/images/tn-210/210_hi_DSC07906.jpg",
-    ],
-    documents: [
-      {
-        name: "TN-210 (RCD) Technická dokumentácia",
-        filename: "TN-210_RCD.pdf",
-        url: "/docs/TN-210_RCD.pdf",
-      },
-    ],
-    color: "red",
-  },
 }
 
 export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) {
@@ -137,17 +52,11 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
           accent: "text-amber-600",
           bg: "bg-amber-500",
           bgHover: "hover:bg-amber-600",
-          bgLight: "bg-amber-50",
-          border: "border-amber-200",
-          ring: "ring-amber-500",
         }
       : {
           accent: "text-red-600",
           bg: "bg-red-500",
           bgHover: "hover:bg-red-600",
-          bgLight: "bg-red-50",
-          border: "border-red-200",
-          ring: "ring-red-500",
         }
 
   const handleAddToCart = () => {
@@ -182,9 +91,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
       />
       <div className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden bg-white rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300">
         {/* Header */}
-        <div
-          className={`flex items-center justify-between p-4 md:p-6 border-b ${colorClasses.bgLight}`}
-        >
+        <div className="flex items-center justify-between p-4 md:p-6 border-b border-slate-200 bg-white">
           <div className="flex items-center gap-3">
             <span
               className={`px-3 py-1 ${colorClasses.bg} text-white text-sm font-bold rounded-full`}
@@ -211,11 +118,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
             onClick={() => setActiveTab("info")}
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 font-medium transition-colors ${
               activeTab === "info"
-                ? `${colorClasses.accent} border-b-2 ${
-                    product.color === "amber"
-                      ? "border-amber-500"
-                      : "border-red-500"
-                  }`
+                ? "text-slate-900 border-b-2 border-slate-500"
                 : "text-slate-500 hover:text-slate-700"
             }`}
           >
@@ -226,11 +129,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
             onClick={() => setActiveTab("docs")}
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 font-medium transition-colors ${
               activeTab === "docs"
-                ? `${colorClasses.accent} border-b-2 ${
-                    product.color === "amber"
-                      ? "border-amber-500"
-                      : "border-red-500"
-                  }`
+                ? "text-slate-900 border-b-2 border-slate-500"
                 : "text-slate-500 hover:text-slate-700"
             }`}
           >
@@ -247,7 +146,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
                 {/* Images */}
                 <div className="space-y-4">
                   <div
-                    className={`relative aspect-square rounded-xl overflow-hidden ${colorClasses.bgLight}`}
+                    className="relative aspect-square rounded-xl overflow-hidden border border-slate-200 bg-white"
                   >
                     <Image
                       src={product.images[activeImageIndex]}
@@ -263,7 +162,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
                         onClick={() => setActiveImageIndex(index)}
                         className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
                           activeImageIndex === index
-                            ? colorClasses.ring + " ring-2"
+                            ? "border-slate-500 ring-2 ring-slate-300"
                             : "border-slate-200 hover:border-slate-300"
                         }`}
                       >
@@ -307,7 +206,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
                     key={index}
                     href={doc.url}
                     download={doc.filename}
-                    className={`flex items-center gap-4 p-4 rounded-xl border ${colorClasses.border} ${colorClasses.bgLight} hover:shadow-md transition-all group`}
+                    className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-white hover:shadow-md transition-all group"
                   >
                     <div
                       className={`w-12 h-12 rounded-lg ${colorClasses.bg} flex items-center justify-center`}

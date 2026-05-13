@@ -9,6 +9,7 @@ const navItems = [
   { href: "#konstrukcia", label: "Konštrukcia" },
   { href: "#efektory", label: "Efektory" },
   { href: "#meracia-technika", label: "Meracia technika" },
+  { href: "#dokumenty", label: "Dokumenty" },
   { href: "#kontakt", label: "Kontakt" },
 ]
 
@@ -23,9 +24,9 @@ export function Header() {
             <Image
               src="/images/logo.png"
               alt="3E-Vision"
-              width={140}
-              height={40}
-              className="h-8 md:h-10 w-auto"
+              width={280}
+              height={96}
+              className="h-14 md:h-20 w-auto"
             />
           </a>
 

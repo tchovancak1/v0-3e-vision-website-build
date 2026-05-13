@@ -8,20 +8,13 @@ import { WhySection } from "@/components/why-section"
 import { ConstructionSection } from "@/components/construction-section"
 import { EffectorsSection } from "@/components/effectors-section"
 import { MeasuringSection } from "@/components/measuring-section"
+import { DocumentsSection } from "@/components/documents-section"
 import { Footer } from "@/components/footer"
 import { CartButton } from "@/components/cart-button"
 import { CartDrawer } from "@/components/cart-drawer"
-import { ProductModal } from "@/components/product-modal"
-
-type ProductId = "tn110" | "tn210"
 
 function HomeContent() {
   const [isCartOpen, setIsCartOpen] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState<ProductId | null>(null)
-
-  const handleProductClick = (productId: ProductId) => {
-    setSelectedProduct(productId)
-  }
 
   return (
     <>
@@ -31,17 +24,13 @@ function HomeContent() {
         <WhySection />
         <ConstructionSection />
         <EffectorsSection />
-        <MeasuringSection onProductClick={handleProductClick} />
+        <MeasuringSection />
+        <DocumentsSection />
       </main>
       <Footer />
       
       <CartButton onClick={() => setIsCartOpen(true)} />
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <ProductModal
-        isOpen={selectedProduct !== null}
-        onClose={() => setSelectedProduct(null)}
-        productId={selectedProduct}
-      />
     </>
   )
 }
