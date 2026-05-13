@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import {
   X,
@@ -44,12 +44,26 @@ S touto skúšačkou môžete vykonávať meranie v elektrických inštaláciác
       "Stupeň ochrany: IP40",
       "Pracovná teplota: -10°C až +50°C",
     ],
-    images: ["/images/tn110-front.jpg", "/images/tn110-detail1.jpg", "/images/tn110-inuse.jpg"],
+    images: [
+      "/images/tn-110/110_Front_hi_DSC07865.jpg",
+      "/images/tn-110/110_Back_hi_DSC07871.jpg",
+      "/images/tn-110/110_hi_DSC07873.jpg",
+      "/images/tn-110/110_hi_DSC07879.jpg",
+      "/images/tn-110/110_hi_DSC07880.jpg",
+      "/images/tn-110/110_hi_DSC07884.jpg",
+      "/images/tn-110/110_hi_DSC07899.jpg",
+      "/images/tn-110/110_hi_DSC07903.jpg",
+    ],
     documents: [
       {
         name: "TN-110 Technická dokumentácia",
         filename: "TN-110.pdf",
         url: "/docs/TN-110.pdf",
+      },
+      {
+        name: "TN-110 CE certifikát",
+        filename: "2026-CE-TN110.pdf",
+        url: "/docs/2026-CE-TN110.pdf",
       },
     ],
     color: "amber",
@@ -74,7 +88,16 @@ Kategória CATIII je určená na meranie obvodov z vybavenia napájaného pevnou
       "Kategória: CAT III 690V",
       "Stupeň ochrany: IP40",
     ],
-    images: ["/images/tn210-front.jpg", "/images/tn210-detail1.jpg", "/images/tn210-inhand.jpg"],
+    images: [
+      "/images/tn-210/210_Front_hi_DSC07861.jpg",
+      "/images/tn-210/210_Back_hi_DSC07864.jpg",
+      "/images/tn-210/210_hi_DSC07874.jpg",
+      "/images/tn-210/210_hi_DSC07887.jpg",
+      "/images/tn-210/210_hi_DSC07889.jpg",
+      "/images/tn-210/210_hi_DSC07890.jpg",
+      "/images/tn-210/210_hi_DSC07897.jpg",
+      "/images/tn-210/210_hi_DSC07906.jpg",
+    ],
     documents: [
       {
         name: "TN-210 (RCD) Technická dokumentácia",
@@ -90,7 +113,18 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
   const [activeTab, setActiveTab] = useState<TabType>("info")
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
+  const [showAddedFeedback, setShowAddedFeedback] = useState(false)
   const { addItem, removeItem, isInCart, updateQuantity, items } = useCart()
+
+  useEffect(() => {
+    if (!showAddedFeedback) return
+
+    const timeout = window.setTimeout(() => {
+      setShowAddedFeedback(false)
+    }, 2200)
+
+    return () => window.clearTimeout(timeout)
+  }, [showAddedFeedback])
 
   if (!isOpen || !productId) return null
 
@@ -119,6 +153,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
   const handleAddToCart = () => {
     if (inCart) {
       removeItem(product.id)
+      setShowAddedFeedback(false)
     } else {
       addItem({
         id: product.id,
@@ -127,6 +162,7 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
         quantity: quantity,
         description: product.shortDesc,
       })
+      setShowAddedFeedback(true)
     }
   }
 
@@ -294,6 +330,12 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
 
         {/* Footer */}
         <div className="p-4 md:p-6 border-t border-slate-200 bg-slate-50">
+          {showAddedFeedback && (
+            <div className="mb-4 flex items-center justify-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-semibold text-green-800 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <CheckCircle className="h-5 w-5" />
+              Produkt bol pridaný do dopytu
+            </div>
+          )}
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="flex items-center gap-3">
               <span className="text-sm text-slate-600">Počet kusov:</span>
@@ -326,7 +368,9 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
                 inCart
                   ? "bg-green-500 hover:bg-green-600"
                   : `${colorClasses.bg} ${colorClasses.bgHover}`
-              } text-white px-8`}
+              } text-white px-8 transition-all ${
+                showAddedFeedback ? "cart-add-success" : ""
+              }`}
             >
               {inCart ? (
                 <>
