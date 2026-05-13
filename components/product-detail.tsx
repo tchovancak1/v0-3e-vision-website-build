@@ -37,11 +37,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const colorClasses =
       product.color === "amber"
           ? {
-            accent: "text-amber-600",
-            bg: "bg-amber-500",
-            bgHover: "hover:bg-amber-600",
-            ring: "ring-amber-100",
-            softBg: "bg-amber-50",
+            accent: "text-slate-700",
+            bg: "bg-slate-700",
+            bgHover: "hover:bg-slate-800",
+            ring: "ring-slate-200",
+            softBg: "bg-slate-100",
           }
           : {
             accent: "text-red-600",

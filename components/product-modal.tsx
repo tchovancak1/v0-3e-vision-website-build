@@ -49,9 +49,9 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
   const colorClasses =
     product.color === "amber"
       ? {
-          accent: "text-amber-600",
-          bg: "bg-amber-500",
-          bgHover: "hover:bg-amber-600",
+          accent: "text-slate-700",
+          bg: "bg-slate-700",
+          bgHover: "hover:bg-slate-800",
         }
       : {
           accent: "text-red-600",
