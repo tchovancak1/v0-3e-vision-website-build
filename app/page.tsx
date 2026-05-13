@@ -21,11 +21,11 @@ function HomeContent() {
       <Header />
       <main>
         <HeroSection />
-        <WhySection />
         <ConstructionSection />
         <EffectorsSection />
         <MeasuringSection />
         <DocumentsSection />
+        <WhySection />
       </main>
       <Footer />
       
