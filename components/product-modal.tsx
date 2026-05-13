@@ -52,11 +52,11 @@ export function ProductModal({ isOpen, onClose, productId }: ProductModalProps) 
           accent: "text-slate-700",
           bg: "bg-slate-700",
           bgHover: "hover:bg-slate-800",
-        }
+      }
       : {
-          accent: "text-red-600",
-          bg: "bg-red-500",
-          bgHover: "hover:bg-red-600",
+          accent: "text-slate-700",
+          bg: "bg-slate-700",
+          bgHover: "hover:bg-slate-800",
         }
 
   const handleAddToCart = () => {

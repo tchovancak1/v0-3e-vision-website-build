@@ -44,11 +44,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             softBg: "bg-slate-100",
           }
           : {
-            accent: "text-red-600",
-            bg: "bg-red-500",
-            bgHover: "hover:bg-red-600",
-            ring: "ring-red-100",
-            softBg: "bg-red-50",
+            accent: "text-slate-700",
+            bg: "bg-slate-700",
+            bgHover: "hover:bg-slate-800",
+            ring: "ring-slate-200",
+            softBg: "bg-slate-100",
           }
 
   useEffect(() => {
