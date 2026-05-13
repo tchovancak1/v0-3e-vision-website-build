@@ -20,10 +20,13 @@ interface ProductDetailProps {
   product: Product
 }
 
+type DetailTab = "params" | "docs"
+
 export function ProductDetail({ product }: ProductDetailProps) {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [showAddedFeedback, setShowAddedFeedback] = useState(false)
+  const [activeTab, setActiveTab] = useState<DetailTab>("params")
   const { addItem, removeItem, isInCart, updateQuantity, items } = useCart()
 
   const inCart = isInCart(product.id)
@@ -160,18 +163,87 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </p>
           </div>
 
-          <div>
-            <h2 className="text-2xl font-bold text-slate-950">Hlavné vlastnosti</h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {product.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-slate-700">
-                  <CheckCircle
-                    className={`mt-0.5 h-5 w-5 flex-shrink-0 ${colorClasses.accent}`}
-                  />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
+              <button
+                type="button"
+                onClick={() => setActiveTab("params")}
+                className={`flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all ${
+                  activeTab === "params"
+                    ? "bg-white text-slate-950 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <CheckCircle className="h-4 w-4" />
+                Technické parametre
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("docs")}
+                className={`flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all ${
+                  activeTab === "docs"
+                    ? "bg-white text-slate-950 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileText className="h-4 w-4" />
+                Dokumenty na stiahnutie
+              </button>
+            </div>
+
+            {activeTab === "params" ? (
+              <div className="mt-6">
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Technické parametre
+                </h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {product.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-slate-700"
+                    >
+                      <CheckCircle
+                        className={`mt-0.5 h-5 w-5 flex-shrink-0 ${colorClasses.accent}`}
+                      />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="mt-6">
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Dokumenty na stiahnutie
+                </h2>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {product.documents.map((doc) => (
+                    <a
+                      key={doc.url}
+                      href={doc.url}
+                      download={doc.filename}
+                      className="group flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm"
+                    >
+                      <span
+                        className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${colorClasses.bg}`}
+                      >
+                        <FileText className="h-5 w-5 text-white" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-semibold text-slate-900 group-hover:underline">
+                          {doc.name}
+                        </span>
+                        <span className="mt-1 block truncate text-xs text-slate-500">
+                          {doc.filename}
+                        </span>
+                      </span>
+                      <Download
+                        className={`h-5 w-5 flex-shrink-0 ${colorClasses.accent}`}
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -230,34 +302,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </Button>
           </div>
 
-          <div className="mt-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-950">Dokumenty</h2>
-            <div className="mt-4 space-y-3">
-              {product.documents.map((doc) => (
-                <a
-                  key={doc.url}
-                  href={doc.url}
-                  download={doc.filename}
-                  className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm"
-                >
-                  <span
-                    className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${colorClasses.bg}`}
-                  >
-                    <FileText className="h-5 w-5 text-white" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-slate-900">
-                      {doc.name}
-                    </span>
-                    <span className="block truncate text-xs text-slate-500">
-                      {doc.filename}
-                    </span>
-                  </span>
-                  <Download className={`h-5 w-5 flex-shrink-0 ${colorClasses.accent}`} />
-                </a>
-              ))}
-            </div>
-          </div>
         </aside>
       </section>
     </main>
