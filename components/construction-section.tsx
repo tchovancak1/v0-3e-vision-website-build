@@ -2,7 +2,7 @@
 
 import {
   Target,
-  Cube,
+  Box,
   FileText,
   Cog,
   BookOpen,
@@ -28,7 +28,7 @@ const steps = [
   },
   {
     number: "2",
-    icon: Cube,
+    icon: Box,
     title: "3D Modelovanie a pokročilé pevnostné analýzy",
     description:
       "Navrhujeme produkty, ktoré sú bezpečné a efektívne. Vytvoríme pre vás:",
