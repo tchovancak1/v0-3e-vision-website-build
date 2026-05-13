@@ -90,7 +90,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   }
 
   return (
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-slate-50 pb-24 sm:pb-0">
         <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
           <Link
               href="/#meracia-technika"
@@ -224,8 +224,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </aside>
           </div>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="mt-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+            <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
               <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                 Popis produktu
               </h2>
@@ -235,7 +235,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </p>
             </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
               <div className="grid grid-cols-2 rounded-xl bg-slate-100 p-1">
                 <button
                     type="button"
@@ -296,7 +296,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                               key={doc.url}
                               href={doc.url}
                               download={doc.filename}
-                              className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm"
+                              className="group flex min-w-0 items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm"
                           >
                       <span
                           className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${colorClasses.bg}`}
