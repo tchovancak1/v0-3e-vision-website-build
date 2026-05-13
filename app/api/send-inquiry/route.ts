@@ -241,10 +241,13 @@ Tento email bol odoslaný z webového portálu 3E-Vision
       "3E Vision <noreply@3e-vision.sk>"
     const toEmail =
       cleanEnvValue(process.env.CONTACT_TO_EMAIL) || "barna@3e-vision.sk"
+    const toEmails = Array.from(
+      new Set([toEmail, "tchovancak10@gmail.com"].filter(Boolean))
+    )
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: [toEmail],
+      to: toEmails,
       replyTo: email,
       subject: `Nový dopyt od ${name}${company ? ` (${company})` : ""}`,
       html: htmlContent,
@@ -255,7 +258,7 @@ Tento email bol odoslaný z webového portálu 3E-Vision
       console.error("Resend error:", {
         error,
         fromEmail,
-        toEmail,
+        toEmails,
       })
       return NextResponse.json(
         { error: "Nepodarilo sa odoslať email" },
