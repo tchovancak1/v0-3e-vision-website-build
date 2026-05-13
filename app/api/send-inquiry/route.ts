@@ -18,9 +18,15 @@ interface InquiryRequest {
   items: CartItem[]
 }
 
+function cleanEnvValue(value: string | undefined) {
+  return value?.trim().replace(/^["']|["']$/g, "")
+}
+
 export async function POST(request: Request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
+    const resendApiKey = cleanEnvValue(process.env.RESEND_API_KEY)
+
+    if (!resendApiKey) {
       console.error("Missing RESEND_API_KEY environment variable")
       return NextResponse.json(
         { error: "Emailová služba nie je nakonfigurovaná" },
@@ -229,10 +235,12 @@ ${message ? `SPRÁVA:\n${message}` : ""}
 Tento email bol odoslaný z webového portálu 3E-Vision
     `
 
-    const resend = new Resend(process.env.RESEND_API_KEY)
+    const resend = new Resend(resendApiKey)
     const fromEmail =
-      process.env.CONTACT_FROM_EMAIL || "3E Vision <noreply@3e-vision.sk>"
-    const toEmail = process.env.CONTACT_TO_EMAIL || "barna@3e-vision.sk"
+      cleanEnvValue(process.env.CONTACT_FROM_EMAIL) ||
+      "3E Vision <noreply@3e-vision.sk>"
+    const toEmail =
+      cleanEnvValue(process.env.CONTACT_TO_EMAIL) || "barna@3e-vision.sk"
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,
