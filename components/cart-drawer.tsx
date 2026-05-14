@@ -67,6 +67,10 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         }, 3000)
       } else {
         const data = await response.json().catch(() => null)
+        if (data?.detail) {
+          setSubmitError(data.detail)
+          return
+        }
         setSubmitError(
           data?.error || "Dopyt sa nepodarilo odoslať. Skúste to prosím neskôr."
         )

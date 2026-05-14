@@ -60,6 +60,28 @@ function parseEmailList(value: string | undefined, fallback: string[] = []) {
   )
 }
 
+function getErrorMessage(error: unknown) {
+  if (error && typeof error === "object" && "message" in error) {
+    const message = (error as { message?: unknown }).message
+    if (typeof message === "string" && message.trim()) {
+      return message
+    }
+  }
+
+  return "Neznáma chyba e-mailovej služby"
+}
+
+function getErrorName(error: unknown) {
+  if (error && typeof error === "object" && "name" in error) {
+    const name = (error as { name?: unknown }).name
+    if (typeof name === "string" && name.trim()) {
+      return name
+    }
+  }
+
+  return "ResendError"
+}
+
 function normalizeItems(items: unknown): CartItem[] {
   if (!Array.isArray(items)) {
     return []
@@ -373,7 +395,10 @@ Tento email bol odoslaný z webového portálu 3E-Vision
         bccEmails,
       })
       return NextResponse.json(
-        { error: "Nepodarilo sa odoslať email" },
+        {
+          error: "Nepodarilo sa odoslať email",
+          detail: `${getErrorName(error)}: ${getErrorMessage(error)}`,
+        },
         { status: 500 }
       )
     }
