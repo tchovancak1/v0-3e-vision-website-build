@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, ReactNode } from "react"
+import { createContext, useContext, useEffect, useState, ReactNode } from "react"
 
 export type CartItemType = "service" | "product"
 
@@ -23,9 +23,35 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
+const CART_STORAGE_KEY = "3e-vision-cart"
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [hasLoadedStoredCart, setHasLoadedStoredCart] = useState(false)
+
+  useEffect(() => {
+    try {
+      const storedCart = window.localStorage.getItem(CART_STORAGE_KEY)
+      if (storedCart) {
+        const parsedCart = JSON.parse(storedCart)
+        if (Array.isArray(parsedCart)) {
+          setItems(parsedCart)
+        }
+      }
+    } catch {
+      window.localStorage.removeItem(CART_STORAGE_KEY)
+    } finally {
+      setHasLoadedStoredCart(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!hasLoadedStoredCart) {
+      return
+    }
+
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
+  }, [hasLoadedStoredCart, items])
 
   const addItem = (item: CartItem) => {
     setItems((prev) => {

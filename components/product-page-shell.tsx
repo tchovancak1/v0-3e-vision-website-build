@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { CartProvider } from "@/context/cart-context"
 import { CartButton } from "@/components/cart-button"
 import { CartDrawer } from "@/components/cart-drawer"
 import { Footer } from "@/components/footer"
@@ -28,9 +27,5 @@ function ProductPageContent({ product }: ProductPageShellProps) {
 }
 
 export function ProductPageShell({ product }: ProductPageShellProps) {
-  return (
-    <CartProvider>
-      <ProductPageContent product={product} />
-    </CartProvider>
-  )
+  return <ProductPageContent product={product} />
 }

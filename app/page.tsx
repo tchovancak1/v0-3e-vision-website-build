@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { CartProvider } from "@/context/cart-context"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { WhySection } from "@/components/why-section"
@@ -36,9 +35,5 @@ function HomeContent() {
 }
 
 export default function Home() {
-  return (
-    <CartProvider>
-      <HomeContent />
-    </CartProvider>
-  )
+  return <HomeContent />
 }

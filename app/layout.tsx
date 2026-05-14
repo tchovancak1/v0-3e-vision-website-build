@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { CartProvider } from "@/context/cart-context"
 import "./globals.css"
 
 const inter = Inter({
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
   title: "3E-Vision | Inžinierske riešenia pre váš úspech",
   description:
     "Od konštrukcie jednoúčelových strojov cez robotické efektory až po presnú meraciu techniku. Komplexné riešenia pod jednou strechou.",
+  icons: {
+    icon: "/favicon.png",
+  },
   keywords: [
     "3E-Vision",
     "konštrukcia strojov",
@@ -56,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
-        {children}
+        <CartProvider>{children}</CartProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
