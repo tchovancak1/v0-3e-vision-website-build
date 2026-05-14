@@ -16,10 +16,68 @@ interface InquiryRequest {
   company?: string
   message?: string
   items: CartItem[]
+  website?: string
 }
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function cleanEnvValue(value: string | undefined) {
   return value?.trim().replace(/^["']|["']$/g, "")
+}
+
+function normalizeText(value: unknown, maxLength: number) {
+  if (typeof value !== "string") {
+    return ""
+  }
+
+  return value.trim().slice(0, maxLength)
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;")
+}
+
+function normalizeItems(items: unknown): CartItem[] {
+  if (!Array.isArray(items)) {
+    return []
+  }
+
+  return items
+    .slice(0, 20)
+    .map((item): CartItem | null => {
+      if (!item || typeof item !== "object") {
+        return null
+      }
+
+      const record = item as Partial<CartItem>
+      const name = normalizeText(record.name, 120)
+      const id = normalizeText(record.id, 80)
+      const type: CartItem["type"] =
+        record.type === "service" ? "service" : "product"
+      const quantity =
+        typeof record.quantity === "number"
+          ? Math.min(Math.max(Math.floor(record.quantity), 1), 999)
+          : 1
+      const description = normalizeText(record.description, 240)
+
+      if (!name || !id) {
+        return null
+      }
+
+      return {
+        id,
+        name,
+        type,
+        quantity,
+        description: description || undefined,
+      }
+    })
+    .filter((item): item is CartItem => item !== null)
 }
 
 export async function POST(request: Request) {
@@ -35,21 +93,36 @@ export async function POST(request: Request) {
     }
 
     const body: InquiryRequest = await request.json()
-    const { name, email, phone, company, message, items } = body
 
-    if (!name || !email || !Array.isArray(items) || items.length === 0) {
+    if (body.website) {
+      return NextResponse.json({ success: true })
+    }
+
+    const name = normalizeText(body.name, 120)
+    const email = normalizeText(body.email, 254).toLowerCase()
+    const phone = normalizeText(body.phone, 40)
+    const company = normalizeText(body.company, 160)
+    const message = normalizeText(body.message, 3000)
+    const items = normalizeItems(body.items)
+
+    if (!name || !EMAIL_PATTERN.test(email) || items.length === 0) {
       return NextResponse.json(
-        { error: "Chýbajú povinné údaje" },
+        { error: "Chýbajú povinné údaje alebo e-mail nemá správny formát" },
         { status: 400 }
       )
     }
 
+    const safeName = escapeHtml(name)
+    const safeEmail = escapeHtml(email)
+    const safePhone = escapeHtml(phone)
+    const safeCompany = escapeHtml(company)
+    const safeMessage = escapeHtml(message)
+
     const itemsList = items
       .map((item) => {
-        if (item.type === "product" && item.quantity) {
-          return `• ${item.name} - ${item.quantity} ks`
-        }
-        return `• ${item.name}`
+        const quantity =
+          item.type === "product" && item.quantity ? ` - ${item.quantity} ks` : ""
+        return `• ${item.name}${quantity}`
       })
       .join("\n")
 
@@ -144,24 +217,24 @@ export async function POST(request: Request) {
     <h1>Nový nezáväzný dopyt</h1>
     <p style="margin: 10px 0 0;">3E-Vision s.r.o.</p>
   </div>
-  
+
   <div class="content">
     <div class="section">
       <h2>Kontaktné údaje</h2>
       <div class="field">
         <div class="field-label">Meno a priezvisko</div>
-        <div class="field-value">${name}</div>
+        <div class="field-value">${safeName}</div>
       </div>
       <div class="field">
         <div class="field-label">E-mail</div>
-        <div class="field-value"><a href="mailto:${email}">${email}</a></div>
+        <div class="field-value"><a href="mailto:${safeEmail}">${safeEmail}</a></div>
       </div>
       ${
         phone
           ? `
       <div class="field">
         <div class="field-label">Telefón</div>
-        <div class="field-value"><a href="tel:${phone}">${phone}</a></div>
+        <div class="field-value"><a href="tel:${safePhone}">${safePhone}</a></div>
       </div>
       `
           : ""
@@ -171,7 +244,7 @@ export async function POST(request: Request) {
           ? `
       <div class="field">
         <div class="field-label">Spoločnosť</div>
-        <div class="field-value">${company}</div>
+        <div class="field-value">${safeCompany}</div>
       </div>
       `
           : ""
@@ -183,15 +256,27 @@ export async function POST(request: Request) {
       <div class="items-list">
         <ul>
           ${items
-            .map(
-              (item) => `
+            .map((item) => {
+              const safeItemName = escapeHtml(item.name)
+              const safeDescription = item.description
+                ? escapeHtml(item.description)
+                : ""
+              const quantity =
+                item.type === "product" && item.quantity
+                  ? ` - ${item.quantity} ks`
+                  : ""
+
+              return `
             <li>
-              <strong>${item.name}</strong>
-              ${item.type === "product" && item.quantity ? ` - ${item.quantity} ks` : ""}
-              ${item.description ? `<br><span style="color: #64748b; font-size: 13px;">${item.description}</span>` : ""}
+              <strong>${safeItemName}</strong>${quantity}
+              ${
+                safeDescription
+                  ? `<br><span style="color: #64748b; font-size: 13px;">${safeDescription}</span>`
+                  : ""
+              }
             </li>
           `
-            )
+            })
             .join("")}
         </ul>
       </div>
@@ -202,7 +287,7 @@ export async function POST(request: Request) {
         ? `
     <div class="section">
       <h2>Správa od zákazníka</h2>
-      <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+      <p style="margin: 0; white-space: pre-wrap;">${safeMessage}</p>
     </div>
     `
         : ""
@@ -241,9 +326,7 @@ Tento email bol odoslaný z webového portálu 3E-Vision
       "3E Vision <noreply@3e-vision.sk>"
     const toEmail =
       cleanEnvValue(process.env.CONTACT_TO_EMAIL) || "barna@3e-vision.sk"
-    const toEmails = Array.from(
-      new Set([toEmail, "tchovancak10@gmail.com"].filter(Boolean))
-    )
+    const toEmails = Array.from(new Set([toEmail].filter(Boolean)))
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,

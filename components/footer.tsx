@@ -75,6 +75,8 @@ export function Footer() {
             <div className="space-y-2 text-slate-400">
               <p className="font-medium text-white">3E-Vision s.r.o.</p>
               <p>Ing. Jozef Barna, PhD.</p>
+              <p>IČO: 52 802 493</p>
+              <p>DIČ: 2121138151</p>
               <p className="flex items-start gap-2 mt-4">
                 <MapPin className="h-5 w-5 text-rose-400 flex-shrink-0 mt-0.5" />
                 <span>Smreková 3, 08 001 Prešov, Slovakia</span>
@@ -84,6 +86,17 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500 text-sm">
+          <div className="mb-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <a
+              href="/ochrana-osobnych-udajov"
+              className="hover:text-amber-400 transition-colors"
+            >
+              Ochrana osobných údajov
+            </a>
+            <a href="/cookies" className="hover:text-amber-400 transition-colors">
+              Cookies
+            </a>
+          </div>
           <p>&copy; {new Date().getFullYear()} 3E-Vision s.r.o. Všetky práva vyhradené.</p>
         </div>
       </div>

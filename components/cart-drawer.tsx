@@ -18,6 +18,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [submitError, setSubmitError] = useState("")
+  const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,8 +27,13 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     message: "",
   })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (e?: React.FormEvent | React.MouseEvent) => {
+    e?.preventDefault()
+    if (!privacyAccepted) {
+      setSubmitError("Pred odoslaním potvrďte oboznámenie s ochranou osobných údajov.")
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitError("")
 
@@ -53,6 +59,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           company: "",
           message: "",
         })
+        setPrivacyAccepted(false)
         setTimeout(() => {
           setIsSuccess(false)
           setShowForm(false)
@@ -194,6 +201,28 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 />
               </div>
 
+              <label className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-700">
+                <input
+                  required
+                  type="checkbox"
+                  checked={privacyAccepted}
+                  onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                />
+                <span>
+                  Oboznámil/a som sa s{" "}
+                  <a
+                    href="/ochrana-osobnych-udajov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-slate-950 underline underline-offset-4"
+                  >
+                    ochranou osobných údajov
+                  </a>
+                  . Údaje budú použité na vybavenie nezáväzného dopytu.
+                </span>
+              </label>
+
               <div className="bg-slate-50 rounded-lg p-4 mt-4">
                 <h4 className="font-semibold text-slate-900 mb-2">
                   Položky v dopyte:
@@ -280,7 +309,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 </Button>
                 <Button
                   onClick={handleSubmit}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !privacyAccepted}
                   className="flex-1 bg-amber-500 hover:bg-amber-600 text-white"
                 >
                   {isSubmitting ? (
