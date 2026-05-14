@@ -3,18 +3,30 @@
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
+const heroImages = [
+  "/homepage/magnific_imagereference-img1-task-_2932586813.png",
+  "/homepage/magnific_imagereference-img1-task-_2932516219.png",
+  "/homepage/magnific_imagereference-img1-task-_2932479128.png",
+  "/homepage/magnific_imagereference-img1-task-_2932407658.png",
+]
+
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background slideshow */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="3E-Vision - Meracia technika"
-          fill
-          className="object-cover"
-          priority
-        />
+        {heroImages.map((image, index) => (
+          <Image
+            key={image}
+            src={image}
+            alt=""
+            fill
+            className="hero-background-slide object-cover"
+            priority={index === 0}
+            sizes="100vw"
+            style={{ animationDelay: `${index * 5}s` }}
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/80" />
       </div>
 
@@ -31,13 +43,13 @@ export function HeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="#konstrukcia"
+              href="/#konstrukcia"
               className="inline-flex items-center justify-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-all hover:scale-105 shadow-lg"
             >
               Naše služby
             </a>
             <a
-              href="#kontakt"
+              href="/#kontakt"
               className="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg backdrop-blur-sm transition-all border border-white/30"
             >
               Kontaktujte nás
@@ -48,7 +60,7 @@ export function HeroSection() {
 
       {/* Scroll Indicator */}
       <a
-        href="#preco-3e"
+        href="/#preco-3e"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce"
       >
         <ChevronDown className="h-10 w-10 text-white/80" />
