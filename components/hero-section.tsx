@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
@@ -11,6 +12,16 @@ const heroImages = [
 ]
 
 export function HeroSection() {
+  const [activeImage, setActiveImage] = useState(0)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % heroImages.length)
+    }, 6500)
+
+    return () => window.clearInterval(interval)
+  }, [])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background slideshow */}
@@ -21,10 +32,11 @@ export function HeroSection() {
             src={image}
             alt=""
             fill
-            className="hero-background-slide object-cover"
+            className={`hero-background-slide object-cover ${
+              index === activeImage ? "is-active" : ""
+            }`}
             priority={index === 0}
             sizes="100vw"
-            style={{ animationDelay: `${index * 5}s` }}
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/80" />
