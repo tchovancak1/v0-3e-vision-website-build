@@ -20,6 +20,7 @@ interface InquiryRequest {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMAIL_LIST_SEPARATOR = /[,;\s]+/
 
 function cleanEnvValue(value: string | undefined) {
   return value?.trim().replace(/^["']|["']$/g, "")
@@ -40,6 +41,23 @@ function escapeHtml(value: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;")
+}
+
+function parseEmailList(value: string | undefined, fallback: string[] = []) {
+  const cleanedValue = cleanEnvValue(value)
+
+  if (!cleanedValue) {
+    return fallback
+  }
+
+  return Array.from(
+    new Set(
+      cleanedValue
+        .split(EMAIL_LIST_SEPARATOR)
+        .map((email) => email.trim())
+        .filter((email) => EMAIL_PATTERN.test(email))
+    )
+  )
 }
 
 function normalizeItems(items: unknown): CartItem[] {
@@ -324,13 +342,23 @@ Tento email bol odoslaný z webového portálu 3E-Vision
     const fromEmail =
       cleanEnvValue(process.env.CONTACT_FROM_EMAIL) ||
       "3E Vision <noreply@3e-vision.sk>"
-    const toEmail =
-      cleanEnvValue(process.env.CONTACT_TO_EMAIL) || "barna@3e-vision.sk"
-    const toEmails = Array.from(new Set([toEmail].filter(Boolean)))
+    const toEmails = parseEmailList(process.env.CONTACT_TO_EMAIL, [
+      "barna@3e-vision.sk",
+    ])
+    const bccEmails = parseEmailList(process.env.CONTACT_BCC_EMAIL)
+
+    if (toEmails.length === 0) {
+      console.error("Missing or invalid CONTACT_TO_EMAIL configuration")
+      return NextResponse.json(
+        { error: "Príjemca dopytu nie je nakonfigurovaný" },
+        { status: 500 }
+      )
+    }
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: toEmails,
+      ...(bccEmails.length > 0 ? { bcc: bccEmails } : {}),
       replyTo: email,
       subject: `Nový dopyt od ${name}${company ? ` (${company})` : ""}`,
       html: htmlContent,
@@ -342,6 +370,7 @@ Tento email bol odoslaný z webového portálu 3E-Vision
         error,
         fromEmail,
         toEmails,
+        bccEmails,
       })
       return NextResponse.json(
         { error: "Nepodarilo sa odoslať email" },
