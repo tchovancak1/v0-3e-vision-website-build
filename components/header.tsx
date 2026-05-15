@@ -6,11 +6,11 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
-  { href: "#konstrukcia", label: "Konštrukcia" },
-  { href: "#efektory", label: "Efektory" },
-  { href: "#meracia-technika", label: "Meracia technika" },
-  { href: "#dokumenty", label: "Dokumenty" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/#konstrukcia", label: "Konštrukcia" },
+  { href: "/#efektory", label: "Efektory" },
+  { href: "/#meracia-technika", label: "Meracia technika" },
+  { href: "/#dokumenty", label: "Dokumenty" },
+  { href: "/#kontakt", label: "Kontakt" },
 ]
 
 export function Header() {
