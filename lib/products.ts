@@ -99,6 +99,11 @@ Kategória CATIII je určená na meranie obvodov z vybavenia napájaného pevnou
         filename: "TN-210_RCD.pdf",
         url: "/docs/TN-210_RCD.pdf",
       },
+      {
+        name: "TN-210 (RCD) CE certifikát",
+        filename: "2026-CE-TN210(RCD).pdf",
+        url: "/docs/2026-CE-TN210(RCD).pdf",
+      },
     ],
     color: "red",
   },
